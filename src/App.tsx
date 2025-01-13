@@ -3,6 +3,7 @@ import './styles/terminal.css';
 import { Terminal } from './components/Terminal';
 import { VideoFeed } from './components/VideoFeed';
 import { useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -20,6 +21,7 @@ function App() {
   if (isMobile) {
     return (
       <div className="min-h-screen bg-black/30 backdrop-blur-sm p-4 flex flex-col">
+        <Analytics />
         <div className="text-center mb-8 p-4">
           <h1 className="text-2xl text-yellow-500 font-bold mb-4">Welcome to My Terminal Portfolio</h1>
           <p className="text-white/90 mb-6">
