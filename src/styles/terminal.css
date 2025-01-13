@@ -1,0 +1,363 @@
+/* Terminal theme colors */
+:root {
+  --foreground: #c5c8c6;
+  --background: #1d1f21;
+  --selection-bg: rgba(255, 255, 255, 0.1);
+  --black: #1d1f21;
+  --red: #cc6666;
+  --green: #b5bd68;
+  --yellow: #f0c674;
+  --blue: #81a2be;
+  --magenta: #b294bb;
+  --cyan: #8abeb7;
+  --white: #c5c8c6;
+  --bright-black: #969896;
+  --bright-red: #d54e53;
+  --bright-green: #b9ca4a;
+  --bright-yellow: #e7c547;
+  --bright-blue: #7aa6da;
+  --bright-magenta: #c397d8;
+  --bright-cyan: #70c0b1;
+  --bright-white: #ffffff;
+}
+
+/* Global styles */
+body {
+  color: var(--foreground);
+  font-family: 'CaskaydiaCove Nerd Font', monospace;
+  font-size: 22px;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-image: url('/frieren_background.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Layout styles */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 20%;
+  gap: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.pane {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.terminal-pane {
+  height: 100%;
+  position: relative;
+}
+
+.pane-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chart-pane {
+  flex: 0 0 auto; /* Prevent resizing */
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background-color: rgba(0, 0, 0, 0.8); /* Optional: Add contrast */
+  overflow: hidden; /* Ensure no overflow */
+  width: 100%; /* Full width of the pane */
+  height: auto; /* Dynamically adjust height */
+}
+
+.menu-pane {
+  height: auto;
+}
+
+/* Menu styles */
+.menu-header {
+  color: var(--bright-yellow);
+  padding: 0.75rem 1rem;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-items {
+  padding: 0.5rem;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+  background-color: var(--selection-bg);
+}
+
+/* System Monitor styles */
+.system-monitor {
+  height: 100%;
+  color: var(--foreground);
+}
+
+.metrics-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.metric {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--bright-yellow);
+}
+
+.metric-value {
+  margin-left: auto;
+  color: var(--bright-green);
+}
+
+.ascii-graph {
+  font-family: 'CaskaydiaCove Nerd Font', monospace;
+  line-height: 1;
+  display: flex;
+  align-items: flex-end;
+  height: 1.5em;
+  gap: 0;
+  padding: 0.25rem;
+  border: 1px solid var(--selection-bg);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.ascii-block {
+  flex: 1;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+/* Terminal styles */
+.terminal {
+  height: 100%;
+  padding: 1rem;
+  color: var(--foreground);
+  font-size: 22px;
+  line-height: 1.5;
+  overflow-y: auto;
+}
+
+.terminal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.command-block {
+  margin-bottom: 1rem;
+}
+
+.command-line {
+  display: flex;
+  align-items: center;
+  min-height: 1.5em;
+}
+
+.command-line.current {
+  margin-top: 0.5rem;
+}
+
+.prompt {
+  color: var(--bright-green);
+  white-space: nowrap;
+}
+
+.command {
+  color: var(--bright-yellow);
+}
+
+.command-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--bright-yellow);
+  font-family: inherit;
+  font-size: inherit;
+  margin-left: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.output {
+  margin-top: 0.5rem;
+  color: var(--foreground);
+  white-space: pre-wrap;
+}
+
+.output-line {
+  line-height: 1.2;
+}
+
+/* Markdown viewer styles */
+.markdown-viewer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.markdown-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--selection-bg);
+  margin-bottom: 0;
+}
+
+.markdown-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 1rem;
+  line-height: 1.6;
+}
+
+.markdown-content h1 {
+  color: var(--bright-yellow);
+  font-size: 1.8em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--selection-bg);
+}
+
+.markdown-content h2 {
+  color: var(--bright-blue);
+  font-size: 1.4em;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content p {
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content ul {
+  margin-bottom: 1rem;
+}
+
+.markdown-content li {
+  margin-bottom: 0.5rem;
+  list-style-type: none;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.markdown-content li:before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  color: var(--yellow);
+}
+
+.markdown-content a {
+  color: var(--blue);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.markdown-content a:hover {
+  color: var(--bright-blue);
+  text-decoration: underline;
+}
+
+.markdown-content strong {
+  color: var(--bright-green);
+  font-weight: bold;
+}
+
+.markdown-content em {
+  color: var(--magenta);
+  font-style: italic;
+}
+
+/* Tetris Game styles */
+.tetris-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  font-family: monospace;
+}
+
+.game-info {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.2em;
+  color: var(--bright-yellow);
+}
+
+.game-board {
+  border: 1px solid var(--bright-blue);
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.board-row {
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+}
+
+.game-controls {
+  color: var(--bright-cyan);
+  text-align: center;
+}
+
+.pre {
+  font-family: monospace;
+  font-size: 4px; /* Adjust this value for smaller text */
+  line-height: 3px; /* Adjust this to maintain aspect ratio */
+  white-space: pre; /* Preserve spaces and newlines for ASCII art */
+  margin: 0;
+  padding: 0;
+  color: #ffffff; /* Optional: Customize color */
+  background: transparent; /* Ensure it blends with your layout */
+}
+
+/* Selection styles */
+::selection {
+  background-color: var(--selection-bg);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--selection-bg);
+  border-radius: 4px;
+}
+
+::-webkit -scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
