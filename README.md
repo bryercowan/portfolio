@@ -1,8 +1,7 @@
 # Terminal Portfolio
 
-A modern, interactive terminal-style portfolio website built with React and TypeScript. This project features a unique terminal interface combined with system monitoring visuals and quick access links.
-
-![Terminal Portfolio](https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop)
+This is my portfolio htat is supposed to mirror my terminal that I use everyday, with some creative changes added! :)
+![Terminal Portfolio](https://i.imgur.com/CNOedPP.jpeg)
 
 ## Features
 
@@ -34,19 +33,6 @@ A modern, interactive terminal-style portfolio website built with React and Type
 - Supabase
 - Vite
 - Lucide React Icons
-
-## Project Structure
-
-```
-src/
-├── components/
-│   ├── Command.tsx
-│   ├── SystemMonitor.tsx
-│   └── Terminal.tsx
-├── styles/
-│   └── terminal.css
-└── App.tsx
-```
 
 ## Environment Variables
 
@@ -121,4 +107,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Bryer Cowan - email@bryercowan.com
 
-Project Link: [https://github.com/bryercowan/terminal-portfolio](https://github.com/bryercowan/terminal-portfolio)
+[bryercowan.com](https://www.bryercowan.com)
