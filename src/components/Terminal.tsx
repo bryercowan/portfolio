@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { TetrisGame } from './TetrisGame';
 import { createClient } from '@supabase/supabase-js';
-import { wrap } from 'lodash';
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -362,33 +361,33 @@ I believe in writing clean, maintainable code and building systems that solve re
 
 An innovative platform that combines company data and api documentation to generate compact services for rapid integration.
 
-## BrandChurn
+## Procuvita
 *DEV*
 
-A web application that helps business owners manage and create content for a variety of platforms.
+A multi agent gamification way to tackle complex life's goals.
 
-**GitHub:** [github.com/bryercowan/frank-frolf](https://github.com/bryercowan/brandchurn)
+**GitHub:** [procuvita-frontend](https://github.com/bryercowan/procuvita-frontend) [procuvita-backend](https://github.com/bryercowan/procuvita-backend)
 
 ## Frank Frolfs Website
 *LIVE*
 
 A mobile-optimized frolf score tracking application with CSV export capabilities. If you aren't my friend Frank, this probably means nothing to you.
 
-**GitHub:** [github.com/bryercowan/frank-frolf](https://github.com/bryercowan/frank-frolf)
+**GitHub:** [frank-frolf](https://github.com/bryercowan/frank-frolf)
 
 ## AI Golf Caddie
 *HOLD*
 
 Professional-grade AI-powered golf assistance at an accessible price point. Other projects are more important to me right now, cant say when I am coming back to this one.
 
-**GitHub:** [github.com/bryercowan/ai-caddie-app](https://github.com/bryercowan/ai-caddie-app)
+**GitHub:** [ai-caddie-app](https://github.com/bryercowan/ai-caddie-app)
 
 ## Portfolio
 *LIVE*
 
 This website you see! Feel free to copy it if you like the design.
 
-**GitHub:** [github.com/bryercowan/ai-caddie-app](https://github.com/bryercowan/portfolio)`,
+**GitHub:** [portfolio](https://github.com/bryercowan/portfolio)`,
 
   contact: `# Contact Information
 
