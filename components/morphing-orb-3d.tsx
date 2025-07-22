@@ -37,12 +37,17 @@ function LoadedHead(props: JSX.IntrinsicElements["group"]) {
   }
 
   scene.updateMatrixWorld(true)
-  const box = new THREE.Box3().setFromObject(scene)
-  const size = new THREE.Vector3()
-  box.getSize(size)
-  const s = 4 / Math.max(size.x, size.y, size.z)
-  scene.scale.setScalar(s)
-  scene.userData.baseScale = s
+  
+  // Only calculate scale once to prevent inconsistencies
+  if (!scene.userData.scaleCalculated) {
+    const box = new THREE.Box3().setFromObject(scene)
+    const size = new THREE.Vector3()
+    box.getSize(size)
+    const s = 4 / Math.max(size.x, size.y, size.z)
+    scene.scale.setScalar(s)
+    scene.userData.baseScale = s
+    scene.userData.scaleCalculated = true
+  }
 
   const shared = new THREE.MeshPhysicalMaterial({
     color: "#B4CDFC",
@@ -63,11 +68,14 @@ function LoadedHead(props: JSX.IntrinsicElements["group"]) {
 
   return <primitive object={scene} {...props} />
 }
-// Preload the model
+// Preload the model with caching
 const modelUrl = process.env.NODE_ENV === 'production'
   ? "https://raw.githubusercontent.com/bryercowan/bryer-portfolio/main/public/models/mannequin_head.glb"
   : "/models/mannequin_head.glb"
-useGLTF.preload(modelUrl)
+
+if (typeof window !== 'undefined') {
+  useGLTF.preload(modelUrl)
+}
 
 /* ----------------------------------------------------- */
 /* Drift‑out word span + keyframes                       */
@@ -458,16 +466,25 @@ export function MorphingOrb3D() {
     <div className="w-full h-full">
       <Canvas
         camera={{ position: [0, 0, 6], fov: 50 }}
-        shadows
-        gl={{ antialias: true, alpha: true }}
+        shadows={process.env.NODE_ENV !== 'production'}
+        gl={{ 
+          antialias: process.env.NODE_ENV !== 'production', 
+          alpha: true,
+          powerPreference: "high-performance"
+        }}
+        dpr={process.env.NODE_ENV === 'production' ? [1, 1.5] : [1, 2]}
         onCreated={({ gl }) => {
           gl.toneMapping = THREE.ACESFilmicToneMapping
           gl.toneMappingExposure = 1.25
+          // Optimize for mobile/low-end devices in production
+          if (process.env.NODE_ENV === 'production') {
+            gl.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+          }
         }}
       >
-        <Environment resolution={64}>
+        <Environment resolution={process.env.NODE_ENV === 'production' ? 32 : 64}>
           <mesh scale={50}>
-            <sphereGeometry args={[1, 32, 32]} />
+            <sphereGeometry args={[1, process.env.NODE_ENV === 'production' ? 16 : 32, process.env.NODE_ENV === 'production' ? 16 : 32]} />
             <meshBasicMaterial side={THREE.BackSide} color="#ffffff" />
           </mesh>
         </Environment>
@@ -476,7 +493,7 @@ export function MorphingOrb3D() {
         <directionalLight
           position={[5, 5, 5]}
           intensity={1.3}
-          castShadow
+          castShadow={process.env.NODE_ENV !== 'production'}
         />
         <pointLight
           position={[0, 10, 0]}
