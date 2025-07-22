@@ -1,0 +1,335 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 3D Morphing Metallic Orb - Blue Metallic */
+.morphing-orb {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(
+      circle at 30% 30%,
+      rgba(147, 197, 253, 0.9) 0%,
+      rgba(96, 165, 250, 0.7) 25%,
+      rgba(59, 130, 246, 0.8) 50%,
+      rgba(37, 99, 235, 0.9) 75%,
+      rgba(29, 78, 216, 1) 100%
+    ), linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+  border-radius: 50%;
+  position: relative;
+  animation: morph 12s ease-in-out infinite, float 8s ease-in-out infinite, rotate 20s linear infinite;
+  box-shadow:
+    0 0 60px rgba(59, 130, 246, 0.4),
+    0 20px 40px rgba(37, 99, 235, 0.3),
+    inset 0 0 60px rgba(147, 197, 253, 0.2),
+    inset -20px -20px 40px rgba(29, 78, 216, 0.4),
+    inset 20px 20px 40px rgba(147, 197, 253, 0.3);
+  transform-style: preserve-3d;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Main highlight - creates the 3D sphere effect */
+.morphing-orb::before {
+  content: "";
+  position: absolute;
+  top: 15%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(147, 197, 253, 0.6) 30%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(15px);
+  animation: highlight-shift 10s ease-in-out infinite;
+}
+
+/* Secondary reflection for more 3D depth */
+.morphing-orb::after {
+  content: "";
+  position: absolute;
+  top: 60%;
+  right: 30%;
+  width: 25%;
+  height: 25%;
+  background: radial-gradient(circle, rgba(147, 197, 253, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(10px);
+  animation: secondary-highlight 8s ease-in-out infinite reverse;
+}
+
+/* Random Effect Classes - Smoother transitions */
+.morphing-orb.square-morph {
+  border-radius: 25% !important;
+  animation: square-morph-anim 4s cubic-bezier(0.4, 0, 0.2, 1), float 8s ease-in-out infinite, rotate 20s linear
+    infinite;
+  transform: perspective(1000px) rotateX(15deg) rotateY(15deg);
+}
+
+.morphing-orb.speed-boost {
+  animation: morph 4s ease-in-out infinite, float 3s ease-in-out infinite, rotate 8s linear infinite;
+  filter: blur(1px) brightness(1.2);
+}
+
+.morphing-orb.giant-pulse {
+  animation: giant-pulse 4s cubic-bezier(0.4, 0, 0.2, 1), morph 12s ease-in-out infinite, float 8s ease-in-out infinite,
+    rotate 20s linear infinite;
+}
+
+.morphing-orb.triangle-shift {
+  border-radius: 20% 80% 20% 80% / 80% 20% 80% 20% !important;
+  animation: triangle-shift-anim 4s cubic-bezier(0.4, 0, 0.2, 1), float 8s ease-in-out infinite, rotate 20s linear
+    infinite;
+  transform: perspective(1000px) rotateX(25deg) rotateZ(10deg);
+}
+
+.morphing-orb.spin-crazy {
+  animation: morph 12s ease-in-out infinite, float 8s ease-in-out infinite, spin-crazy 3s cubic-bezier(0.4, 0, 0.2, 1)
+    infinite;
+  transform: perspective(1000px) rotateX(30deg);
+}
+
+.morphing-orb.glow-intense {
+  box-shadow:
+    0 0 120px rgba(59, 130, 246, 0.8),
+    0 30px 60px rgba(37, 99, 235, 0.5),
+    inset 0 0 80px rgba(147, 197, 253, 0.4),
+    inset -30px -30px 60px rgba(29, 78, 216, 0.6),
+    inset 30px 30px 60px rgba(147, 197, 253, 0.5) !important;
+  animation: glow-pulse 4s cubic-bezier(0.4, 0, 0.2, 1), morph 12s ease-in-out infinite, float 8s ease-in-out infinite,
+    rotate 20s linear infinite;
+}
+
+.morphing-orb.micro-shrink {
+  animation: micro-shrink 4s cubic-bezier(0.4, 0, 0.2, 1), morph 12s ease-in-out infinite, float 8s ease-in-out infinite,
+    rotate 20s linear infinite;
+  transform: perspective(1000px) rotateY(45deg);
+}
+
+.morphing-orb.diamond-shape {
+  border-radius: 15% !important;
+  transform: perspective(1000px) rotateX(45deg) rotateY(45deg) rotateZ(45deg);
+  animation: diamond-spin 4s cubic-bezier(0.4, 0, 0.2, 1), float 8s ease-in-out infinite;
+}
+
+/* Smoother Effect Keyframes */
+@keyframes square-morph-anim {
+  0%,
+  100% {
+    border-radius: 50%;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    border-radius: 25%;
+    transform: perspective(1000px) rotateX(15deg) rotateY(15deg);
+  }
+}
+
+@keyframes giant-pulse {
+  0%,
+  100% {
+    transform: perspective(1000px) scale(1) rotateX(0deg);
+  }
+  50% {
+    transform: perspective(1000px) scale(1.4) rotateX(10deg);
+  }
+}
+
+@keyframes triangle-shift-anim {
+  0%,
+  100% {
+    border-radius: 50%;
+    transform: perspective(1000px) rotateX(0deg) rotateZ(0deg);
+  }
+  50% {
+    border-radius: 20% 80% 20% 80% / 80% 20% 80% 20%;
+    transform: perspective(1000px) rotateX(25deg) rotateZ(10deg);
+  }
+}
+
+@keyframes spin-crazy {
+  0% {
+    transform: perspective(1000px) rotateX(30deg) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(30deg) rotateY(360deg) rotateZ(180deg);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    filter: blur(0px) brightness(1);
+    transform: perspective(1000px) scale(1);
+  }
+  50% {
+    filter: blur(2px) brightness(1.4);
+    transform: perspective(1000px) scale(1.1);
+  }
+}
+
+@keyframes micro-shrink {
+  0%,
+  100% {
+    transform: perspective(1000px) scale(1) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(1000px) scale(0.4) rotateY(45deg);
+  }
+}
+
+@keyframes diamond-spin {
+  0% {
+    transform: perspective(1000px) rotateX(45deg) rotateY(45deg) rotateZ(45deg) scale(1);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(90deg) rotateY(90deg) rotateZ(90deg) scale(1.1);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(135deg) rotateY(135deg) rotateZ(135deg) scale(1);
+  }
+}
+
+/* Enhanced Base Animations with 3D transforms */
+@keyframes morph {
+  0%,
+  100% {
+    border-radius: 50%;
+    transform: perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: perspective(1000px) scale(1.05) rotateX(5deg) rotateY(10deg);
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    transform: perspective(1000px) scale(0.95) rotateX(-5deg) rotateY(-10deg);
+  }
+  75% {
+    border-radius: 40% 60% 60% 40% / 70% 30% 60% 40%;
+    transform: perspective(1000px) scale(1.02) rotateX(3deg) rotateY(-5deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: perspective(1000px) translateY(0px) rotateX(0deg);
+  }
+  50% {
+    transform: perspective(1000px) translateY(-25px) rotateX(2deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: perspective(1000px) rotateZ(0deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateZ(360deg);
+  }
+}
+
+@keyframes highlight-shift {
+  0%,
+  100% {
+    top: 15%;
+    left: 25%;
+    opacity: 0.8;
+  }
+  50% {
+    top: 20%;
+    left: 30%;
+    opacity: 1;
+  }
+}
+
+@keyframes secondary-highlight {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
