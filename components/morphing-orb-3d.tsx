@@ -373,7 +373,8 @@ function MorphingEntity() {
     /* head orientation */
     if (head.current) {
       const h = head.current
-      h.scale.setScalar(THREE.MathUtils.lerp(0.001, 5, k))
+      const base = process.env.NODE_ENV === 'production' ? 1 : 5;
+      h.scale.setScalar(THREE.MathUtils.lerp(0.001, base, k))
       h.position.set(0, -0.1, 0)
       h.traverse((o: any) => {
         if (o.material) o.material.opacity = k
