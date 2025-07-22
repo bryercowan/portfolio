@@ -39,17 +39,17 @@ export function Portfolio() {
   ]
 
   return (
-    <div className="h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex">
-      {/* Left Column - Main Content */}
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex flex-col lg:flex-row lg:h-screen">
+      {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        {/* Top Row - Header, About, and Orb Space (50/50 split) */}
-        <div className="flex h-1/2">
-          {/* Header and About - 50% */}
-          <div className="flex-1 p-8">
+        {/* Mobile: Linear Stack / Desktop: Top Row - Header, About, and Orb Space */}
+        <div className="flex flex-col lg:flex-row lg:h-1/2">
+          {/* Header and About */}
+          <div className="flex-1 p-6 lg:p-8">
             {/* Header */}
-            <div className="mb-8">
-              <div className="text-gray-900 text-4xl font-light mb-2 tracking-wide">BRYER COWAN</div>
-              <div className="text-purple-400 text-xl font-light mb-1">Software Engineer III</div>
+            <div className="mb-6 lg:mb-8">
+              <div className="text-gray-900 text-3xl lg:text-4xl font-light mb-2 tracking-wide">BRYER COWAN</div>
+              <div className="text-purple-400 text-lg lg:text-xl font-light mb-1">Software Engineer III</div>
               <div className="text-gray-500 text-sm font-light">Marion, US • 3+ Years Experience</div>
             </div>
 
@@ -74,15 +74,15 @@ export function Portfolio() {
             </div>
           </div>
 
-          {/* 3D Orb Dedicated Space - 50% */}
-          <div className="flex-1 flex items-center justify-center">
+          {/* 3D Orb - Hidden on mobile, shown at bottom */}
+          <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center">
             <MorphingOrb3D />
           </div>
         </div>
 
         {/* Bottom Row - Skills, Projects, Contact */}
-        <div className="flex-1 p-8 pt-0 overflow-y-auto">
-          <div className="grid grid-cols-3 gap-8 h-full">
+        <div className="flex-1 p-6 lg:p-8 lg:pt-0 overflow-y-auto">
+          <div className="space-y-8 lg:grid lg:grid-cols-3 lg:gap-8 lg:h-full lg:space-y-0">
             {/* Skills */}
             <div>
               <h2 className="text-gray-700 text-lg mb-4 border-b border-gray-200/50 pb-2 font-light">Skills</h2>
@@ -186,6 +186,11 @@ export function Portfolio() {
           </div>
         </div>
       </div>
+
+      {/* 3D Orb - Mobile: At the end */}
+      {/* <div className="lg:hidden h-64 flex items-center justify-center bg-gradient-to-b from-gray-100 to-gray-200"> */}
+      {/*   <MorphingOrb3D /> */}
+      {/* </div> */}
     </div>
   )
 }
