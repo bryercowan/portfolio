@@ -22,10 +22,10 @@ import * as THREE from "three"
 /* ----------------------------------------------------- */
 function LoadedHead(props: JSX.IntrinsicElements["group"]) {
   // Try multiple URLs - local first, then fallback to external
-  const modelUrl = process.env.NODE_ENV === 'production' 
-    ? "https://raw.githubusercontent.com/bryercowan/bryer-portfolio/main/public/models/mannequin_head.glb"
+  const modelUrl = process.env.NODE_ENV === 'production'
+    ? "https://raw.githubusercontent.com/bryercowan/portfolio/main/public/models/mannequin_head.glb"
     : "/models/mannequin_head.glb"
-  
+
   const { scene } = useGLTF(modelUrl) as any
 
   if (!scene) {
@@ -64,7 +64,7 @@ function LoadedHead(props: JSX.IntrinsicElements["group"]) {
   return <primitive object={scene} {...props} />
 }
 // Preload the model
-const modelUrl = process.env.NODE_ENV === 'production' 
+const modelUrl = process.env.NODE_ENV === 'production'
   ? "https://raw.githubusercontent.com/bryercowan/bryer-portfolio/main/public/models/mannequin_head.glb"
   : "/models/mannequin_head.glb"
 useGLTF.preload(modelUrl)
