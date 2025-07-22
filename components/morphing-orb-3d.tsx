@@ -21,91 +21,53 @@ import * as THREE from "three"
 /* Head loader                                           */
 /* ----------------------------------------------------- */
 function LoadedHead(props: JSX.IntrinsicElements["group"]) {
-  try {
-    const gltf = useGLTF("/models/mannequin_head.glb")
-    
-    if (!gltf || !gltf.scene) {
-      return <FallbackHead {...props} />
-    }
+  // Try multiple URLs - local first, then fallback to external
+  const modelUrl = process.env.NODE_ENV === 'production' 
+    ? "https://raw.githubusercontent.com/bryercowan/bryer-portfolio/main/public/models/mannequin_head.glb"
+    : "/models/mannequin_head.glb"
+  
+  const { scene } = useGLTF(modelUrl) as any
 
-    const { scene } = gltf
-
-    scene.updateMatrixWorld(true)
-    const box = new THREE.Box3().setFromObject(scene)
-    const size = new THREE.Vector3()
-    box.getSize(size)
-    const s = 4 / Math.max(size.x, size.y, size.z)
-    scene.scale.setScalar(s)
-    scene.userData.baseScale = s
-
-    const shared = new THREE.MeshPhysicalMaterial({
-      color: "#B4CDFC",
-      metalness: 0.8,
-      roughness: 0.15,
-      envMapIntensity: 0.9,
-      clearcoat: 0.7,
-      clearcoatRoughness: 0.05,
-      sheen: 0.3,
-      emissive: new THREE.Color("#8FB8FF"),
-      emissiveIntensity: 0.05,
-      transparent: true,
-      opacity: 0,
-    })
-    scene.traverse((o: any) => {
-      if (o.isMesh) o.material = shared.clone()
-    })
-
-    return <primitive object={scene} {...props} />
-  } catch (error) {
-    console.error("Failed to load GLTF head:", error)
-    return <FallbackHead {...props} />
-  }
-}
-
-function FallbackHead(props: JSX.IntrinsicElements["group"]) {
-  return (
-    <group {...props}>
-      {/* Simple 3D head shape as fallback */}
-      <mesh position={[0, 0.5, 0]}>
-        <sphereGeometry args={[1, 16, 16]} />
-        <meshPhysicalMaterial
-          color="#B4CDFC"
-          metalness={0.8}
-          roughness={0.15}
-          envMapIntensity={0.9}
-          clearcoat={0.7}
-          clearcoatRoughness={0.05}
-          sheen={0.3}
-          emissive="#8FB8FF"
-          emissiveIntensity={0.05}
-          transparent
-          opacity={0}
-        />
-      </mesh>
-      {/* Simple neck */}
-      <mesh position={[0, -0.3, 0]}>
-        <cylinderGeometry args={[0.3, 0.4, 0.8, 8]} />
-        <meshPhysicalMaterial
-          color="#B4CDFC"
-          metalness={0.8}
-          roughness={0.15}
-          envMapIntensity={0.9}
-          clearcoat={0.7}
-          clearcoatRoughness={0.05}
-          sheen={0.3}
-          emissive="#8FB8FF"
-          emissiveIntensity={0.05}
-          transparent
-          opacity={0}
-        />
-      </mesh>
-      <Html center position={[0, -1.5, 0]} style={{ color: "#666", fontSize: "8px" }}>
-        Using fallback 3D head
+  if (!scene) {
+    return (
+      <Html center style={{ color: "#666" }}>
+        Loading head...
       </Html>
-    </group>
-  )
+    )
+  }
+
+  scene.updateMatrixWorld(true)
+  const box = new THREE.Box3().setFromObject(scene)
+  const size = new THREE.Vector3()
+  box.getSize(size)
+  const s = 4 / Math.max(size.x, size.y, size.z)
+  scene.scale.setScalar(s)
+  scene.userData.baseScale = s
+
+  const shared = new THREE.MeshPhysicalMaterial({
+    color: "#B4CDFC",
+    metalness: 0.8,
+    roughness: 0.15,
+    envMapIntensity: 0.9,
+    clearcoat: 0.7,
+    clearcoatRoughness: 0.05,
+    sheen: 0.3,
+    emissive: new THREE.Color("#8FB8FF"),
+    emissiveIntensity: 0.05,
+    transparent: true,
+    opacity: 0,
+  })
+  scene.traverse((o: any) => {
+    if (o.isMesh) o.material = shared.clone()
+  })
+
+  return <primitive object={scene} {...props} />
 }
-useGLTF.preload("/models/mannequin_head.glb")
+// Preload the model
+const modelUrl = process.env.NODE_ENV === 'production' 
+  ? "https://raw.githubusercontent.com/bryercowan/bryer-portfolio/main/public/models/mannequin_head.glb"
+  : "/models/mannequin_head.glb"
+useGLTF.preload(modelUrl)
 
 /* ----------------------------------------------------- */
 /* Drift‑out word span + keyframes                       */
