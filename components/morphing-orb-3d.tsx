@@ -37,7 +37,7 @@ function LoadedHead(props: JSX.IntrinsicElements["group"]) {
   }
 
   scene.updateMatrixWorld(true)
-  
+
   // Only calculate scale once to prevent inconsistencies
   if (!scene.userData.scaleCalculated) {
     const box = new THREE.Box3().setFromObject(scene)
@@ -381,7 +381,7 @@ function MorphingEntity() {
     /* head orientation */
     if (head.current) {
       const h = head.current
-      const base = process.env.NODE_ENV === 'production' ? 1 : 5;
+      const base = process.env.NODE_ENV === 'production' ? .8 : 5;
       h.scale.setScalar(THREE.MathUtils.lerp(0.001, base, k))
       h.position.set(0, -0.1, 0)
       h.traverse((o: any) => {
@@ -467,8 +467,8 @@ export function MorphingOrb3D() {
       <Canvas
         camera={{ position: [0, 0, 6], fov: 50 }}
         shadows={process.env.NODE_ENV !== 'production'}
-        gl={{ 
-          antialias: process.env.NODE_ENV !== 'production', 
+        gl={{
+          antialias: process.env.NODE_ENV !== 'production',
           alpha: true,
           powerPreference: "high-performance"
         }}
