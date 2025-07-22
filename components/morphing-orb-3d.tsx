@@ -20,13 +20,45 @@ import * as THREE from "three"
 /* Head loader                                           */
 /* ----------------------------------------------------- */
 function LoadedHead(props: JSX.IntrinsicElements["group"]) {
-  const { scene } =
-    useGLTF("/models/mannequin_head.glb", true, undefined, () => null) as any
+  const [loadingError, setLoadingError] = useState<string | null>(null)
+  const [debugInfo, setDebugInfo] = useState<string>("")
+  
+  useEffect(() => {
+    // Test if models directory is accessible
+    fetch('/models/test.json')
+      .then(res => res.ok ? res.json() : Promise.reject(`Status: ${res.status}`))
+      .then(data => setDebugInfo(`Models dir OK: ${data.test}`))
+      .catch(err => setDebugInfo(`Models dir FAIL: ${err}`))
+  }, [])
+  
+  let gltfResult
+  try {
+    gltfResult = useGLTF("/models/mannequin_head.glb", true, undefined, (error) => {
+      console.error("GLTF Loading Error:", error)
+      setLoadingError(error?.message || "Failed to load model")
+    })
+  } catch (error) {
+    console.error("GLTF Hook Error:", error)
+    setLoadingError("Hook initialization failed")
+  }
+
+  const { scene } = (gltfResult || {}) as any
+
+  if (loadingError) {
+    return (
+      <Html center style={{ color: "#ff6b6b", fontSize: "10px", textAlign: "center" }}>
+        Model Error:<br/>{loadingError}<br/>
+        <small>{debugInfo}</small>
+      </Html>
+    )
+  }
 
   if (!scene) {
     return (
-      <Html center style={{ color: "#666" }}>
-        add /models/mannequin_head.glb
+      <Html center style={{ color: "#666", fontSize: "10px", textAlign: "center" }}>
+        Loading model...<br/>
+        <small>{debugInfo}</small><br/>
+        (Check: /models/mannequin_head.glb)
       </Html>
     )
   }
