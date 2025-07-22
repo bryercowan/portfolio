@@ -1,6 +1,6 @@
 "use client"
 
-import { ExternalLink, Github } from "lucide-react"
+import { ExternalLink, Github, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function Projects() {
@@ -17,12 +17,14 @@ export function Projects() {
       description:
         "Using a Pixy camera, automated RC robots in a fight club. Implemented computer vision and robotics control systems.",
       technologies: ["Arduino", "Pixy Camera", "Computer Vision"],
+      yt: "https://www.youtube.com/watch?v=3KBpyYLCXUc&t=95s",
     },
     {
       title: "Valorant Game Reinforcement",
       description:
         "Used a Python script to set off a taser when the player is losing to make them play better. A unique approach to gaming performance enhancement.",
       technologies: ["Python", "Arduino", "Game Integration"],
+      yt: "https://www.youtube.com/watch?v=BYr-uRUPyuU&t=65s",
     },
   ]
 
@@ -82,17 +84,19 @@ export function Projects() {
                       </a>
                     </Button>
                   )}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-purple-500 hover:border-purple-400 hover:bg-purple-500/10 bg-transparent text-purple-400 font-mono text-xs"
-                    asChild
-                  >
-                    <a href="mailto:email@bryercowan.com?subject=Project Inquiry&body=I'd like to learn more about your projects...">
-                      <ExternalLink className="h-3 w-3 mr-1" />
-                      INFO
-                    </a>
-                  </Button>
+                  {project.yt && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-purple-500 hover:border-purple-400 hover:bg-purple-500/10 bg-transparent text-purple-400 font-mono text-xs"
+                      asChild
+                    >
+                      <a href={project.yt} target="_blank" rel="noopener noreferrer">
+                        <Youtube className="h-3 w-3 mr-1" />
+                        VIDEO
+                      </a>
+                    </Button>
+                  )}
                 </div>
               </div>
             ))}

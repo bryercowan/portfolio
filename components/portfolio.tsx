@@ -1,6 +1,6 @@
 "use client"
 
-import { Github, Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import { Github, Linkedin, Mail, Phone, MapPin, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { MorphingOrb3D } from "./morphing-orb-3d"
 
@@ -26,14 +26,14 @@ export function Portfolio() {
       title: "Robot Fight Club",
       tech: "Arduino • Computer Vision",
       desc: "Automated RC robots with Pixy camera",
-      url: "mailto:email@bryercowan.com?subject=Robot Fight Club Project&body=I'd like to learn more about your Robot Fight Club project...",
+      url: "https://www.youtube.com/watch?v=3KBpyYLCXUc&t=95s",
       isGithub: false,
     },
     {
       title: "Valorant Reinforcement",
       tech: "Python • Hardware Integration",
       desc: "Performance enhancement via feedback",
-      url: "mailto:email@bryercowan.com?subject=Valorant Reinforcement Project&body=I'd like to learn more about your Valorant Reinforcement project...",
+      url: "https://www.youtube.com/watch?v=BYr-uRUPyuU&t=65s",
       isGithub: false,
     },
   ]
@@ -122,7 +122,7 @@ export function Portfolio() {
                         asChild
                       >
                         <a href={project.url} target="_blank" rel="noopener noreferrer">
-                          {project.isGithub ? <Github className="h-3 w-3" /> : <Mail className="h-3 w-3" />}
+                          {project.isGithub ? <Github className="h-3 w-3" /> : <Youtube className="h-3 w-3" />}
                         </a>
                       </Button>
                     </div>
